@@ -1,5 +1,6 @@
 package com.example.eventticketplatform.domain;
 
+import jakarta.persistence.Column;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 
