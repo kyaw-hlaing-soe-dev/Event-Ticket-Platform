@@ -1,9 +1,14 @@
 package com.example.eventticketplatform.domain;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -14,6 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class User {
+
     @Id
     @Column(name = "id", nullable = false, updatable = false)
     private UUID id;
@@ -23,5 +29,14 @@ public class User {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false , updatable = false)
+    private LocalDateTime createdAt;
+
+    @LastModifiedBy
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 
 }
