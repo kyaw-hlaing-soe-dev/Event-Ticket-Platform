@@ -18,3 +18,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/event-ticket-platform
