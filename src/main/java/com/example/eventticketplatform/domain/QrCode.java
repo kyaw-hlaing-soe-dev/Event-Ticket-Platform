@@ -1,24 +1,22 @@
 package com.example.eventticketplatform.domain;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Ticket")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
-public class Ticket {
+public class QrCode {
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
@@ -27,21 +25,14 @@ public class Ticket {
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TicketStatusEnum status;
+    private QrCodeStatusEnum status;
+
+    @Column(name = "value", nullable = false)
+    private String value;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_type_id", nullable = false)
-    private TicketType ticketType;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchaser_id", nullable = false)
-    private User purchaser;
-
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
-    private List<TicketValidation> ticketValidations = new ArrayList<>();
-
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
-    private List<QrCode> qrCodes = new ArrayList<>();
+    @JoinColumn(name = "ticket_id", nullable = false)
+    private Ticket ticket;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false , updatable = false)
