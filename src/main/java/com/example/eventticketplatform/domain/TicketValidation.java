@@ -6,39 +6,35 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Ticket")
+@Table(name = "ticket_validation")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 
-public class Ticket {
+public class TicketValidation {
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID uuid;
+    private UUID id;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TicketStatusEnum status;
+    private TicketValidationStatusEnum status;
+
+    @Column(name = "validation_method", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TicketValidationMethod validationMethod;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_type_id", nullable = false)
-    private TicketType ticketType;
+    @JoinColumn(name = "ticket_id", nullable = false)
+    private Ticket ticket;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "purchaser_id", nullable = false)
-    private User purchaser;
-
-    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
-    private List<TicketValidation> ticketValidations = new ArrayList<>();
 
     @CreatedDate
     @Column(name = "created_at", nullable = false , updatable = false)
@@ -47,4 +43,6 @@ public class Ticket {
     @LastModifiedBy
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+
 }
