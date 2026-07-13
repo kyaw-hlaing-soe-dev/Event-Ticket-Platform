@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -46,4 +47,16 @@ public class TicketType {
     @LastModifiedBy
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        TicketType that = (TicketType) o;
+        return Double.compare(price, that.price) == 0 && totalAvailable == that.totalAvailable && Objects.equals(uuid, that.uuid) && Objects.equals(name, that.name) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uuid, name, price, totalAvailable, createdAt, updatedAt);
+    }
 }
