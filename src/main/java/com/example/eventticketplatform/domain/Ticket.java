@@ -20,18 +20,20 @@ public class Ticket {
 
     @Id
     @Column(name = "id", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-
-    @Column(name = "name", nullable = false)
-    private String name;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private EventStatusEnum status;
+    private TicketStatusEnum status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticket_type_id", nullable = false)
     private TicketType ticketType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "purchaser_id", nullable = false)
+    private User purchaser;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false , updatable = false)

@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -35,9 +36,8 @@ public class TicketType {
     @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ticket_id", nullable = false)
-    private Ticket ticket;
+    @OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL)
+    private List<Ticket> ticket;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false , updatable = false)
