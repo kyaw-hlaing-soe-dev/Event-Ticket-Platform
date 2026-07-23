@@ -1,4 +1,4 @@
-package com.example.eventticketplatform.domain;
+package com.example.eventticketplatform.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +33,9 @@ public class Event {
 
     @Column(name = "end_time", nullable = false)
     private LocalDateTime end;
+
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "Venue", nullable = false)
     private String venue;
