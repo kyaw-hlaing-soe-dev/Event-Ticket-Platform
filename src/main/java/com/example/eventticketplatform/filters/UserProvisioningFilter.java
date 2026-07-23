@@ -1,6 +1,6 @@
 package com.example.eventticketplatform.filters;
 
-import com.example.eventticketplatform.domain.User;
+import com.example.eventticketplatform.domain.entities.User;
 import com.example.eventticketplatform.repositiories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
